@@ -2,7 +2,7 @@ const { Rental, validate} = require('../models/rental');
 const { Movie } = require('../models/movie');
 const { Customer } = require('../models/customer');
 const express = require('express');
-const router = express.Router();
+const router = express.Router();  
 
 router.get('/', async (req, res) => {
    const rentals = await Rental.find().sort('-dateOut');
@@ -34,11 +34,9 @@ router.post('/', async (req, res) => {
         }
     });
 
-    rental = await rental.save();  // Corrected typo here
-
+    await rental.save();
     movie.numberInStock--;
-    movie.save();  // Corrected typo here
-
+    await movie.save();
     res.send(rental);
 });
 
