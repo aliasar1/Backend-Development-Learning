@@ -54,5 +54,4 @@ router.get('/:id', async (req, res) => {
   res.send(customer);
 });
 
-
 module.exports = router; 
