@@ -1,27 +1,35 @@
 const mongoose = require('mongoose');
 const Joi = require('joi');
+const jwt = require('jsonwebtoken');
 
-const User = mongoose.model('User', new mongoose.Schema({
-    name: {
+const userSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
+    minlength: 5,
+    maxlength: 50
+  },
+  email: {
+      type: String,
+      unique: true,
+      required: true,
+      minlength: 5,
+      maxlength: 255
+    },
+  password: {
       type: String,
       required: true,
       minlength: 5,
-      maxlength: 50
-    },
-    email: {
-        type: String,
-        unique: true,
-        required: true,
-        minlength: 5,
-        maxlength: 255
-      },
-    password: {
-        type: String,
-        required: true,
-        minlength: 5,
-        maxlength: 1024
-    }
-})); 
+      maxlength: 1024
+  }
+})
+
+userSchema.methods.generateAuthToken = function(){
+  const token = jwt.sign({ _id: this._id }, process.env.JWT_KEY);
+  return token;
+}
+
+const User = mongoose.model('User', userSchema); 
 
 // We can user npm i joi-password-complexity to give passowrd a pattern
 

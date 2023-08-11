@@ -1,5 +1,4 @@
 const Joi = require('joi');
-const config = require('config');
 const dotenv = require('dotenv');
 Joi.objectId = require('joi-objectid')(Joi)
 const genres = require('./routes/genres');
@@ -14,7 +13,7 @@ const app = express();
 
 dotenv.config();
 
-if(!process.env.JWT){
+if(!process.env.JWT_KEY){
     console.log('FATAL ERROR: jwtPrivateKey is not defined.');
     process.exit(1);
 }
