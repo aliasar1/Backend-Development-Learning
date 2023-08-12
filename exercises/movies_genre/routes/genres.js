@@ -4,7 +4,14 @@ const { Genre, validate } = require('../models/genre');
 const express = require('express');
 const router = express.Router();
 
+// This approach when express-async-errors doesn't work.
+// router.get('/', asyncMiddleware(async (req, res) => {
+//   const genres = await Genre.find().sort('name');
+//     res.send(genres);
+// }));
+
 router.get('/', async (req, res) => {
+  // throw new Error('Cound not load genres!');
   const genres = await Genre.find().sort('name');
   res.send(genres);
 });
