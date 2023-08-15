@@ -24,5 +24,6 @@ process.on('unhandledRejection', (ex) => {
 // throw new Error("Bad error in startup!");
 
 const port = process.env.PORT || 3000;
-app.listen(port, () => logger.info(`Listening on port ${port}...`));
+const server = app.listen(port, () => logger.info(`Listening on port ${port}...`));
 
+module.exports = server;
