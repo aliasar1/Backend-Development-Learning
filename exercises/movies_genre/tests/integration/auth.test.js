@@ -9,7 +9,7 @@ describe('auth middleware', ()=>{
     afterEach(async ()=> {
         await Genre.deleteMany();
         if (server) {
-            server.close();
+            await server.close();
         }
     });
 
